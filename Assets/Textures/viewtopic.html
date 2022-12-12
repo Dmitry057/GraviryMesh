@@ -1,0 +1,1300 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+<head>
+<meta charset="utf-8" /> 
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="keywords" content="Pieter Van Houte Blackmagic Design Fusion Studio Eyeon training tutorials compositing node based motion graphics VFX user group forum VFX" />
+<meta name="description" content="The leading Forum for Blackmagic Design Fusion Studio Users with tips, tricks, tools and tutorials. Join the friendliest compositing community around!" />
+<link rel="shortcut icon" href="https://www.steakunderwater.com/wesuckless/favicon.ico" type="image/x-icon" />
+
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<title>Projection Tool from 2D Texture to 3D Sphere - We Suck Less</title>
+
+	<link rel="alternate" type="application/atom+xml" title="Feed - We Suck Less" href="/wesuckless/feed">	<link rel="alternate" type="application/atom+xml" title="Feed - News" href="/wesuckless/feed/news">	<link rel="alternate" type="application/atom+xml" title="Feed - All forums" href="/wesuckless/feed/forums">	<link rel="alternate" type="application/atom+xml" title="Feed - New Topics" href="/wesuckless/feed/topics">		<link rel="alternate" type="application/atom+xml" title="Feed - Forum - Fusion Scripting, Fuses and Macros" href="/wesuckless/feed/forum/6">	<link rel="alternate" type="application/atom+xml" title="Feed - Topic - Projection Tool from 2D Texture to 3D Sphere" href="/wesuckless/feed/topic/4629">	
+	<link rel="canonical" href="https://www.steakunderwater.com/wesuckless/viewtopic.php?t=4629">
+
+<!--
+	phpBB style name: Subway
+	Based on style:   prosilver (this is the default phpBB3 style)
+	Original author:  Tom Beddard ( http://www.subBlue.com/ )
+	Modified by:	  KomiDesign ( http://www.komidesign.com/ )
+	                  We Suck Less ( https://www.steakunderwater.com/wesuckless/ )
+	Version:          3.3.2
+-->
+
+<script>
+	WebFontConfig = {
+		google: {
+			families: ['Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i&subset=cyrillic,cyrillic-ext,greek,greek-ext,latin-ext,vietnamese']
+		}
+	};
+
+	(function(d) {
+		var wf = d.createElement('script'), s = d.scripts[0];
+		wf.src = 'https://ajax.googleapis.com/ajax/libs/webfont/1.5.18/webfont.js';
+		wf.async = true;
+		s.parentNode.insertBefore(wf, s);
+	})(document);
+</script>
+<link href="//fonts.googleapis.com/css?family=Open+Sans:300,400,600&amp;subset=latin,cyrillic-ext,latin-ext,cyrillic,greek-ext,greek,vietnamese" rel="stylesheet" type="text/css">
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+<link href="./styles/Subway/theme/stylesheet.css?assets_version=858" rel="stylesheet">
+<link href="./styles/Subway/theme/en/stylesheet.css?assets_version=858" rel="stylesheet">
+
+
+<!-- FONT ICONS -->
+<link href="./styles/Subway/theme/subway-icons.css" rel="stylesheet" type="text/css">
+
+
+
+<!--[if lte IE 9]>
+	<link href="./styles/Subway/theme/tweaks.css?assets_version=858" rel="stylesheet">
+<![endif]-->
+
+<meta name="description" content="Is there a Fusion tool available, which will carry out a projection or distortion from a 2D texture image into a 3D sphere? That means that it makes sure, th…">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@steakunderwater">
+<meta property="og:locale" content="en_GB">
+<meta property="og:site_name" content="We Suck Less">
+<meta property="og:url" content="https://www.steakunderwater.com/wesuckless/viewtopic.php?t=4629">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Projection Tool from 2D Texture to 3D Sphere">
+<meta property="og:description" content="Is there a Fusion tool available, which will carry out a projection or distortion from a 2D texture image into a 3D sphere? That means that it makes sure, th…">
+<meta property="og:image" content="https://www.steakunderwater.com/wesuckless/images/WSL_Happy-Charlie.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="640">
+<meta property="og:image:height" content="239">
+<meta property="article:published_time" content="2021-01-19T04:46:49-08:00">
+<meta property="article:section" content="Fusion Scripting, Fuses and Macros">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"DiscussionForumPosting","url":"https://www.steakunderwater.com/wesuckless/viewtopic.php?t=4629","headline":"Projection Tool from 2D Texture to 3D Sphere","description":"Is there a Fusion tool available, which will carry out a projection or distortion from a 2D texture image into a 3D sphere? That means that it makes sure, th\u2026","image":"https://www.steakunderwater.com/wesuckless/images/WSL_Happy-Charlie.png","author":{"@type":"Person","name":"tida"},"datePublished":"2021-01-19T04:46:49-08:00","articleSection":"Fusion Scripting, Fuses and Macros","publisher":{"@type":"Organization","name":"We Suck Less","url":"https://www.steakunderwater.com/wesuckless","logo":{"@type":"ImageObject","url":"https://www.steakunderwater.com/wesuckless/images/WSL_Happy-Charlie.png","width":640,"height":239}}}
+</script>
+<meta name="google-site-verification" content="" />
+	<link href="./styles/Subway/theme/nivo-slider/nivo-slider.css" rel="stylesheet" type="text/css"/>
+<link href="./styles/Subway/theme/nivo-slider/themes/subway-theme.css" rel="stylesheet" type="text/css"/>
+<link href="./styles/Subway/theme/sop/css/spectrum.css" rel="stylesheet" type="text/css"/>
+<link href="./styles/Subway/theme/sop/css/subway_op.css" rel="stylesheet" type="text/css"/>
+<style type="text/css">
+#logo i { color:#fa6800;}.logo-text { color:#fa6800;}#logo i { font-size: 0px;}.logo-text { font-size: 0px;}.postbody { float: right;}.postprofile { float: left;}.online:before {right: auto;left: 4px;}.online:after{right: auto;left: 0;border-right: 30px solid transparent;border-left: none;}.online.has-profile .post-buttons{ right: 0;}#wrap { max-width: 1380px; }	
+														a:hover { color: #999999;}
+	
+	body { background-color: #2f2f2f;}
+	a,ul.topiclist li.row dt a.subforum.unread,
+ul.topiclist li.row dt a.subforum.unread:before,
+.imageset.icon_post_target_unread:before {color: #aaaaaa;}
+	a:hover {color: #7f7f7f;}
+	a.forumtitle:visited,a.topictitle:visited,dl.faq dd a:visited,.postlink:visited,
+a.lastsubject:visited {color: #aaaaaa;}
+	.search-box .button:hover,#nav-main  > li > a,#nav-main  li.small-cube > a,
+	#nav-main ul.dropdown-menu,#responsive-menu-button a,.cube-bg-1,.pagination li.active span,
+	.s-tabs,.panel h2,.panel h3,.panel h4,.sheader h2,.sheader h3,.scontent,.pagination li a:hover, .pagination .dropdown-visible a.dropdown-trigger,
+	.nojs .pagination .dropdown-container:hover a.dropdown-trigger,.contact-icons a:hover,.button:hover,
+	a.arrow-left:hover,a.arrow-right:hover, .dropdown-visible .dropdown-select,
+	.nojs .dropdown-container:hover .dropdown-select,.global_unread:before,
+	.global_unread_mine:before,.global_unread_locked:before,.global_unread_locked_mine:before,
+	.announce_unread:before,.announce_unread_mine:before,.announce_unread_locked:before,.announce_unread_locked_mine:before,.op_navigation li.tab a,
+	.forum_unread:before,.forum_unread_locked:before,.forum_unread_subforum:before,.sticky_unread:before,
+	.sticky_unread_mine:before,.sticky_unread_locked:before,.sticky_unread_locked_mine:before,
+	.topic_unread:before,.topic_unread_mine:before,.topic_unread_hot:before,.topic_unread_hot_mine:before,
+	.topic_unread_locked:before,.topic_unread_locked_mine:before,.pm_unread:before,#tabs .tab > a,
+	input.button1:focus, input.button2:focus, input.button3:focus,a.button1:hover,#navigation a, 
+	input.button1:hover, a.button2:hover, input.button2:hover, input.button3:hover,h3#review,
+	.phpbb_alert,.stat-block > h3,.stat-block > h3,#page-body .mini-panel,#minitabs .tab > a,.dropdown-extended .header,.dropdown-extended .footer,.dark-skin .contact-icons a:hover, .dark-skin .button:hover, .dark-skin a.arrow-left:hover, .dark-skin a.arrow-right:hover, .dark-skin .pagination li a:hover, .dark-skin .dropdown-visible .dropdown-select, .dark-skin .nojs .dropdown-container:hover .dropdown-select, .dark-skin a.button1:hover, .dark-skin input.button1:hover, .dark-skin a.button2:hover, .dark-skin input.button2:hover, .dark-skin input.button3:hover,.header2 #nav-main li.small-cube:first-child > a,.header2 #nav-main li.small-cube:last-child > a,.header3 #page-header .navbar-bottom,.theme-subway .nivo-caption {background-color: #5e5e5e;}	.forumbg,.forabg,.socials li a:hover,.cube-bg-2,.section-index #nav-main .li-home > a,#nav-main > li > a:hover,#nav-main  li.small-cube > a:hover,#nav-main .dropdown-menu li a:hover,#nav-main > li.dropdown:hover > a,.dropdown-extended a.mark_read,.section-faq #nav-main .li-useful > a,.section-memberlist #nav-main .li-useful > a,.section-viewforum #nav-main .li-forum > a,.section-viewtopic #nav-main .li-forum > a,.section-search #nav-main .li-forum > a,#tabs .tab > a:hover,#tabs .activetab > a,#minitabs .activetab > a,#minitabs .activetab > a:hover,#navigation a:hover,#navigation #active-subsection a,body .options-panel #navigation .tab.activetab a,.bootstrap-switch .bootstrap-switch-handle-on.bootstrap-switch-btn-theme, .bootstrap-switch .bootstrap-switch-handle-off.bootstrap-switch-btn-theme,.header2 #nav-main li.small-cube:first-child > a:hover,.header2 #nav-main li.small-cube:last-child > a:hover,#sidebar fieldset.quick-login input.button2:hover,.op_navigation li.tab a:hover, .op_navigation li.tab.activetab a {
+		background-color: #39464c;} 
+	@media only screen and (min-width: 993px) {
+		#nav-main  li.small-cube:first-child > a,
+		#nav-main  li.small-cube:last-child > a {
+			background-color: #39464c;
+		} 
+	}	
+
+											</style>
+
+
+<!--[if gte IE 11]>
+.codebox_plus_wrap li
+{
+	display: block;
+}
+
+.codebox_plus_wrap li>div
+{
+	display: inline;
+}
+<![endif]-->
+
+<style type="text/css">
+    .mention {
+        color: #ff0000;
+    }
+</style>
+<style type="text/css">.usernameGlobalsElement { color: #; }</style>
+	
+<link href="./ext/alfredoramos/simplespoiler/styles/all/theme/css/common.min.css?assets_version=858" rel="stylesheet" media="screen" />
+<link href="./ext/alfredoramos/simplespoiler/styles/prosilver/theme/css/style.min.css?assets_version=858" rel="stylesheet" media="screen" />
+<link href="./ext/alfredoramos/simplespoiler/styles/prosilver/theme/css/colors.min.css?assets_version=858" rel="stylesheet" media="screen" />
+<link href="./ext/dmzx/downloadlog/styles/prosilver/theme/downloadlog.css?assets_version=858" rel="stylesheet" media="screen" />
+<link href="./ext/dmzx/fileupload/styles/prosilver/theme/fileupload.css?assets_version=858" rel="stylesheet" media="screen" />
+<link href="./ext/dmzx/hidebirthdays/styles/prosilver/theme/hidebirthdays.css?assets_version=858" rel="stylesheet" media="screen" />
+<link href="./ext/dmzx/imageupload/styles/Subway/theme/imageupload.css?assets_version=858" rel="stylesheet" media="screen" />
+<link href="./ext/dmzx/mchat/styles/Subway/theme/mchat.css?assets_version=858" rel="stylesheet" media="screen" />
+<link href="./ext/dmzx/newestmembers/styles/prosilver/theme/newestmembers.css?assets_version=858" rel="stylesheet" media="screen" />
+<link href="./ext/dmzx/pmregbar/styles/all/theme/pmregbar.css?assets_version=858" rel="stylesheet" media="screen" />
+<link href="./ext/dmzx/quotescollection/styles/Subway/theme/quotescollection.css?assets_version=858" rel="stylesheet" media="screen" />
+<link href="./ext/ernadoo/qte/styles/Subway/theme/qte.css?assets_version=858" rel="stylesheet" media="screen" />
+<link href="./ext/galandas/searchindex/styles/Subway/theme/searches.css?assets_version=858" rel="stylesheet" media="screen" />
+<link href="./ext/gfksx/thanksforposts/styles/prosilver/theme/thanks.css?assets_version=858" rel="stylesheet" media="screen" />
+<link href="./ext/hifikabin/googlesearch/styles/Subway/theme/googlesearch.css?assets_version=858" rel="stylesheet" media="screen" />
+<link href="./ext/kasimi/postnumbers/styles/prosilver/theme/postnumbers.css?assets_version=858" rel="stylesheet" media="screen" />
+<link href="./ext/kinerity/bestanswer/styles/Subway/theme/bestanswer.css?assets_version=858" rel="stylesheet" media="screen" />
+<link href="./ext/o0johntam0o/codeboxplus/styles/Subway/theme/style.css?assets_version=858" rel="stylesheet" media="screen" />
+<link href="./ext/paul999/mention/styles/Subway/theme/mention.css?assets_version=858" rel="stylesheet" media="screen" />
+<link href="./ext/phpbb/pages/styles/Subway/theme/pages_common.css?assets_version=858" rel="stylesheet" media="screen" />
+<link href="./ext/rmcgirr83/elonw/styles/all/theme/elonw.css?assets_version=858" rel="stylesheet" media="screen" />
+<link href="./ext/skouat/ppde/styles/all/theme/donation.css?assets_version=858" rel="stylesheet" media="screen" />
+<link href="./ext/sniper/s_username/styles/all/theme/s_username.css?assets_version=858" rel="stylesheet" media="screen" />
+<link href="./ext/sniper/tables/styles/prosilver/theme/tables.css?assets_version=858" rel="stylesheet" media="screen" />
+<link href="./ext/vse/lightbox/styles/all/template/lightbox/css/lightbox.min.css?assets_version=858" rel="stylesheet" media="screen" />
+<link href="./ext/phpbb/boardannouncements/styles/Subway/theme/boardannouncements.css?assets_version=858" rel="stylesheet" media="screen" />
+<link href="./ext/kasimi/mchatrooms/styles/Subway/theme/common.css?assets_version=858" rel="stylesheet" media="screen" />
+
+
+	 
+		<!-- OneAll Social Sharing : http://www.oneall.com //-->
+		<script type="text/javascript">
+			// <![CDATA[		
+				(function () {
+					var oa = document.createElement('script'); oa.type = 'text/javascript'; 
+					oa.async = true; oa.src = '//steakunderwatercom.api.oneall.com/socialize/library.js'
+					var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(oa, s);
+				})();
+			// ]]>
+		</script>
+
+<!--
+Infinite Scroll. An extension for the phpBB Forum Software package.
+
+Copyright (c) 2019, Jakub Senko
+License Proprietary/All rights reserved
+-->
+
+	<script>
+		var senky_infinitescroll_page = 'viewtopic'
+	</script>
+	<style>
+		#senky_infinitescroll_loader,
+		#senky_infinitescroll_loader div {
+			transition: height 0.2s ease-in-out;
+			overflow: hidden;
+		}
+		#senky_infinitescroll_loader {
+			text-align: center;
+			height: 0;
+			
+		}
+		#senky_infinitescroll_loader.flex {
+			display: flex;
+			justify-content: center;
+			flex-direction: column;
+		}
+		#senky_infinitescroll_loader.displayed,
+		#senky_infinitescroll_loader.displayed div {
+			height: 50px !important;
+		}
+	</style>
+		
+</head>
+<body id="phpbb" class="nojs dark-skin header5 notouch section-viewtopic ltr  ">
+
+<div id="info">
+	<div id="infobar">
+		<a href="./ucp.php?mode=login&amp;redirect=viewtopic.php%3Ft%3D4629"><span class="pm-reg"></span><br><br><center>Please don't click away.</center><br>Happy end of year 2022! We Suck Less will continue to grow in 2023, and I need your support. Fewer than 1 percent of users donate. If you are already one of those generous people, I warmly thank you. If We Suck Less has given you knowledge that was worth something to you this year, please take a minute to become a supporter. Thank you!<br><br><span class="pm-reg"></span></a>
+		<a href="https://www.patreon.com/bePatron?u=9794246" data-patreon-widget-type="become-patron-button">Become a Patron!</a><script async src="https://c6.patreon.com/becomePatronButton.bundle.js"></script>
+	</div>
+</div>
+
+<span id="usernameGlobalsContainer" style="display: none">Anonymous</span>
+
+<div id="main-wrap">
+	<div id="wrap">
+		<a id="top" class="anchor" accesskey="t"></a>
+		<div id="page-header">
+
+			
+					
+				
+			<div class="headerbar" role="banner">					
+				<div class="inner">
+
+								
+					<div class="top"></div>
+
+					<div id="site-description">
+						<!-- LOGO START BELOW-->
+						<a id="logo" class="logo" href="./index.php" title="Home">
+						<img alt="We Suck Less" src="https://www.steakunderwater.com/wesuckless/styles/Subway/artwork/WSL_Happy-Charlie.PNG">						<span class="logo-text">Subway</span>
+						</a>						
+						<!-- LOGO END -->				 
+						<p class="skiplink"><a href="#start_here">Skip to content</a></p>
+					</div>									
+
+															<div class="navbar" role="navigation">
+	<div class="inner">
+
+		<div id="responsive-menu-button">
+			<a href="#"></a>
+        </div>
+		
+		<ul id="nav-main" role="menubar">
+			
+
+
+			
+
+
+			
+
+	<li class="small-icon icon-ppde-header no-bulletin"><a href="/wesuckless/donate" title="Support WSL" role="menuitem"><i class="icon-heart"></i><span>Support WSL</span></a></li>
+			
+			
+			
+			
+			<li class="four-cubes">
+							<ul>
+											<li class="small-cube"><a href="./ucp.php?mode=register" title="Register" role="menuitem"><i class="icon-checkbox-checked"></i><span>Register</span></a></li>
+					
+					<li class="small-cube"><a href="#" title="Login" data-toggle="modal" data-target="#loginmodal" accesskey="x" role="menuitem"><i class="icon-switch"></i><span>Login</span></a></li>
+					
+					<li class="small-cube hide-max992 guest-link"><a href="#" title="Hello, guest !"><i class="icon-user3"></i></a></li>					
+
+					<li class="small-cube"><a href="/wesuckless/contactadmin" title="Contact us" role="menuitem"><i class="icon-envelope"></i><span>Contact us</span></a></li>
+					
+									</ul>					
+				
+			</li>					
+		</ul>
+
+	</div>
+</div>
+
+<!-- Modal login -->
+		<div class="modal fade" id="loginmodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content cube-bg-1">
+				<form method="post" action="./ucp.php?mode=login">
+					<div class="modal-header">
+				        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="icon-uniE0BE"></i></button> 						
+				    </div>
+				    
+				    <div class="modal-body">
+				    	<div class="modal-login-block">
+				    		<div class="modal-login-header">
+				    			<h2>Login</h2>
+				    			<a href="./ucp.php?mode=register" class="small-link">Register</a>
+				    		</div>
+				    		<div class="modal-login-content">	
+				    			<fieldset class="quick-login">				    		
+				    				<div class="mb20">				    					
+				    					<input type="text" placeholder="&#xe674" name="username" id="username" size="10" class="inputbox autowidth input-icon" title="Username" />
+				    				</div>
+				    				<div class="mb20">				    					
+				    					<input placeholder="&#xe688" type="password" name="password" id="password" size="10" class="inputbox autowidth input-icon" title="Password" />
+				    				</div>
+
+				    				<div class="mb10">	
+				    					<a class="op-link" href="https://www.steakunderwater.com/wesuckless/ucp.php?mode=sendpassword">I forgot my password</a>
+				    				</div>				    								
+
+				    								    				<div class="mb10">
+				    					<label class="op-link" for="autologin">Remember me <input type="checkbox" name="autologin" id="autologin" /></label>
+				    				</div>		
+				    				
+				    				<div class="mb20">
+				    					<label class="op-link" for="viewonline">Hide my online status this session <input type="checkbox" name="viewonline" id="viewonline" tabindex="5" /></label>
+				    				</div>	
+
+				    				<input type="submit" name="login" value="Login" class="button2" />
+				    				<input type="hidden" name="redirect" value="./viewtopic.php?t=4629" />
+<input type="hidden" name="creation_time" value="1670872772" />
+<input type="hidden" name="form_token" value="ec167776cc7671913f0ff8f1694f47dd8060beb8" />
+
+									
+				    			</fieldset>
+				    		</div>
+				    	</div>	
+					</div>
+				</form>	
+
+			</div>
+		</div>
+	</div>
+	<!-- Modal login END-->						
+					
+				</div>
+			</div>
+
+							<div class="navbar-bottom">
+				
+																								<ul id="nav-breadcrumbs" class="linklist navlinks" role="menubar">
+																								<li class="breadcrumbs" itemscope itemtype="https://schema.org/BreadcrumbList">
+
+							
+															<span class="crumb" itemtype="https://schema.org/ListItem" itemprop="itemListElement" itemscope><a itemprop="item" href="./index.php" accesskey="h" data-navbar-reference="index"><i class="icon fa-home fa-fw"></i><span itemprop="name">Home</span></a><meta itemprop="position" content="1" /></span>
+
+																							
+																<span class="crumb" itemtype="https://schema.org/ListItem" itemprop="itemListElement" itemscope data-forum-id="4"><a itemprop="item" href="./viewforum.php?f=4"><span itemprop="name">Blackmagic Design</span></a><meta itemprop="position" content="2" /></span>
+																															
+																<span class="crumb" itemtype="https://schema.org/ListItem" itemprop="itemListElement" itemscope data-forum-id="6"><a itemprop="item" href="./viewforum.php?f=6"><span itemprop="name">Fusion Scripting, Fuses and Macros</span></a><meta itemprop="position" content="3" /></span>
+															
+													</li>
+									
+					</ul>
+
+									
+			</div>
+					
+		</div>
+
+			
+		<a id="start_here" class="anchor"></a>
+		<div id="page-body" role="main">
+
+			
+	
+		
+
+				
+
+					
+
+
+			
+
+			
+						<div id="phpbb_announcement" style="background-color:#262626">
+		<a href="/wesuckless/boardannouncements/close?hash=5d4213f4" data-ajax="close_announcement" data-overlay="false" class="close clearfix" title="Close announcement"></a>		<div>New to the forum? Welcome! Please read <a href="https://www.steakunderwater.com/wesuckless/viewtopic.php?f=2&amp;t=275" class="postlink">this</a> and <a href="https://www.steakunderwater.com/wesuckless/viewtopic.php?f=2&amp;t=2057" class="postlink">this</a>.</div>
+	</div>
+
+<h2 class="topic-title"><a href="./viewtopic.php?t=4629">Projection Tool from 2D Texture to 3D Sphere</a></h2>
+
+
+
+<div class="panel">
+	<div class="action-bar bar-top">
+		
+					<a href="./posting.php?mode=reply&amp;t=4629" class="button" title="Post a reply">
+									<span>Post Reply</span> <i class="icon fa-reply fa-fw" aria-hidden="true"></i>
+							</a>
+		
+		<a href="./viewtopic.php?t=4629&amp;view=previous" class="button" title="Previous topic">Previous topic</a><a href="./viewtopic.php?t=4629&amp;view=next" class="button" title="Next topic">Next topic</a>			<div class="dropdown-container dropdown-button-control topic-tools">
+		<span title="Topic tools" class="button button-secondary dropdown-trigger dropdown-select">
+			<i class="icon fa-wrench fa-fw" aria-hidden="true"></i>
+			<span class="caret"><i class="icon fa-sort-down fa-fw" aria-hidden="true"></i></span>
+		</span>
+		<div class="dropdown">
+			<div class="pointer"><div class="pointer-inner"></div></div>
+			<ul class="dropdown-contents">
+																												<li>
+					<a href="./viewtopic.php?t=4629&amp;view=print" title="Print view" accesskey="p">
+						<i class="icon fa-print fa-fw" aria-hidden="true"></i><span>Print view</span>
+					</a>
+				</li>
+											</ul>
+		</div>
+	</div>
+		
+		
+					<div class="pagination">
+				Messages: 8
+									&bull; Page <strong>1</strong> of <strong>1</strong>
+							</div>
+					</div>
+
+	
+	
+	</div>
+
+			<div id="p35998" class="post has-profile bg2">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile35998">
+			<dt class="has-profile-rank has-avatar">
+				<div class="avatar-container">
+																<a href="./memberlist.php?mode=viewprofile&amp;u=4591" class="avatar"><img class="avatar" src="./download/file.php?avatar=4591_1597922137.png" width="100" height="100" alt="User avatar" /></a>														</div>
+								<a href="./memberlist.php?mode=viewprofile&amp;u=4591" style="color: #35a219;" class="username-coloured">tida</a>							</dt>
+
+						<dd class="profile-rank">Fusionista</dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> 453</dd>		<dd class="profile-joined"><strong>Joined:</strong> Mon Jan 27, 2020 4:37 am</dd>		
+		
+		
+<dd id="list_inner_hidden_container_35998" jxdom-closest="dl.postprofile" jxdom-find="dd.profile-joined" jxdom-action="before" >
+<div class="profile-answers"><strong>Answers:</strong> 2</div>
+</dd>
+									<dd class="profile-custom-field profile-realname"><strong>Real name:</strong> none</dd>
+							    <dd class="profile-posts" data-user-receive-id="4591"><strong>Been&nbsp;thanked:</strong> <a href="/wesuckless/thankslist/givens/4591/false">86 times</a></dd>
+
+						
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content35998">
+
+					<h3 class="first">
+						<a href="./viewtopic.php?p=35998#p35998">Projection Tool from 2D Texture to 3D Sphere</a>
+		</h3>
+
+													
+						<p class="author post-number post-number-phpbb">
+	<a href="./viewtopic.php?p=35998#p35998" title="Copy post link to clipboard">#1</a>
+</p>
+			<p class="author">
+									<a class="unread" href="./viewtopic.php?p=35998#p35998" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="./memberlist.php?mode=viewprofile&amp;u=4591" style="color: #35a219;" class="username-coloured">tida</a></strong> &raquo; </span><time datetime="2021-01-19T12:46:49+00:00">Tue Jan 19, 2021 4:46 am</time>
+			</p>
+			
+			
+			
+			<div class="content" style="border-style:groove; box-shadow: 0px -1px 0px 0px rgb(0 0 0 / 10%); border-top-color:#35a219">Is there a Fusion tool available, which will carry out a projection or distortion from a 2D texture image into a 3D sphere? That means that it makes sure, that the poles appear not compressed. <br>
+<br>
+The math behind that should be something like a reverse mapping of a Mercator projection from Sphere to a Cylinder as described here:<br>
+<a href="http://paulbourke.net/geometry/transformationprojection/" class="postlink">http://paulbourke.net/geometry/transfor ... rojection/</a><script class="js-qq-post-info" type="application/json">{"user":"4591","username":"tida","post":"35998","time":"1611060409"}</script></div>
+
+			
+			
+									
+						<div id='list_thanks35998'>
+</div>
+<div id='div_post_reput35998'>
+</div>
+			
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	<hr class="divider" />
+				<div id="p35999" class="post has-profile bg1">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile35999">
+			<dt class="has-profile-rank has-avatar">
+				<div class="avatar-container">
+																<a href="./memberlist.php?mode=viewprofile&amp;u=3211" class="avatar"><img class="avatar" src="./download/file.php?avatar=3211_1569364201.jpg" width="100" height="100" alt="User avatar" /></a>														</div>
+								<a href="./memberlist.php?mode=viewprofile&amp;u=3211" style="color: #35a219;" class="username-coloured">Millolab</a>							</dt>
+
+						<dd class="profile-rank">Fusionista</dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> 984</dd>		<dd class="profile-joined"><strong>Joined:</strong> Wed Oct 24, 2018 6:26 am</dd>		
+		
+		
+<dd id="list_inner_hidden_container_35999" jxdom-closest="dl.postprofile" jxdom-find="dd.profile-joined" jxdom-action="before" >
+<div class="profile-answers"><strong>Answers:</strong> 8</div>
+</dd>
+									    <dd class="profile-posts" data-user-receive-id="3211"><strong>Been&nbsp;thanked:</strong> <a href="/wesuckless/thankslist/givens/3211/false">25 times</a></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact Millolab">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact Millolab</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="https://emiliosapia.myportfolio.com" title="Website" class="last-cell">
+										<span class="contact-icon phpbb_website-icon">Website</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content35999">
+
+					<h3 >
+						<a href="./viewtopic.php?p=35999#p35999">Re: Projection Tool from 2D Texture to 3D Sphere</a>
+		</h3>
+
+													
+						<p class="author post-number post-number-phpbb">
+	<a href="./viewtopic.php?p=35999#p35999" title="Copy post link to clipboard">#2</a>
+</p>
+			<p class="author">
+									<a class="unread" href="./viewtopic.php?p=35999#p35999" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="./memberlist.php?mode=viewprofile&amp;u=3211" style="color: #35a219;" class="username-coloured">Millolab</a></strong> &raquo; </span><time datetime="2021-01-19T13:59:21+00:00">Tue Jan 19, 2021 5:59 am</time>
+			</p>
+			
+			
+			
+			<div class="content" style="border-style:groove; box-shadow: 0px -1px 0px 0px rgb(0 0 0 / 10%); border-top-color:#35a219">I'm not aware of one, would be cool to have it!<script class="js-qq-post-info" type="application/json">{"user":"3211","username":"Millolab","post":"35999","time":"1611064761"}</script></div>
+
+			
+			
+									
+						<div id='list_thanks35999'>
+</div>
+<div id='div_post_reput35999'>
+</div>
+			
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	<hr class="divider" />
+				<div id="p36001" class="post has-profile bg2">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile36001">
+			<dt class="has-profile-rank has-avatar">
+				<div class="avatar-container">
+																<a href="./memberlist.php?mode=viewprofile&amp;u=94" class="avatar"><img class="avatar" src="./download/file.php?avatar=94_1464129661.png" width="100" height="100" alt="User avatar" /></a>														</div>
+								<a href="./memberlist.php?mode=viewprofile&amp;u=94" style="color: #DFBA1A;" class="username-coloured">Chad</a>							</dt>
+
+						<dd class="profile-rank">Fusionator</dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> 1734</dd>		<dd class="profile-joined"><strong>Joined:</strong> Fri Aug 08, 2014 1:11 pm</dd>		
+		
+						    <dd class="profile-posts" data-user-receive-id="94"><strong>Been&nbsp;thanked:</strong> <a href="/wesuckless/thankslist/givens/94/false">9 times</a></dd>
+
+						
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content36001">
+
+					<h3 >
+						<a href="./viewtopic.php?p=36001#p36001">Re: Projection Tool from 2D Texture to 3D Sphere</a>
+		</h3>
+
+													
+						<p class="author post-number post-number-phpbb">
+	<a href="./viewtopic.php?p=36001#p36001" title="Copy post link to clipboard">#3</a>
+</p>
+			<p class="author">
+									<a class="unread" href="./viewtopic.php?p=36001#p36001" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="./memberlist.php?mode=viewprofile&amp;u=94" style="color: #DFBA1A;" class="username-coloured">Chad</a></strong> &raquo; </span><time datetime="2021-01-19T15:17:11+00:00">Tue Jan 19, 2021 7:17 am</time>
+			</p>
+			
+			
+			
+			<div class="content" style="border-style:groove; box-shadow: 0px -1px 0px 0px rgb(0 0 0 / 10%); border-top-color:#DFBA1A">CT or 3CuS would be able to do that pretty easily.<script class="js-qq-post-info" type="application/json">{"user":"94","username":"Chad","post":"36001","time":"1611069431"}</script></div>
+
+			
+			
+									
+						<div id='list_thanks36001'>
+</div>
+<div id='div_post_reput36001'>
+</div>
+			
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	<hr class="divider" />
+				<div id="p36004" class="post has-profile bg1">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile36004">
+			<dt class="has-profile-rank has-avatar">
+				<div class="avatar-container">
+																<a href="./memberlist.php?mode=viewprofile&amp;u=4591" class="avatar"><img class="avatar" src="./download/file.php?avatar=4591_1597922137.png" width="100" height="100" alt="User avatar" /></a>														</div>
+								<a href="./memberlist.php?mode=viewprofile&amp;u=4591" style="color: #35a219;" class="username-coloured">tida</a>							</dt>
+
+						<dd class="profile-rank">Fusionista</dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> 453</dd>		<dd class="profile-joined"><strong>Joined:</strong> Mon Jan 27, 2020 4:37 am</dd>		
+		
+		
+<dd id="list_inner_hidden_container_36004" jxdom-closest="dl.postprofile" jxdom-find="dd.profile-joined" jxdom-action="before" >
+<div class="profile-answers"><strong>Answers:</strong> 2</div>
+</dd>
+									<dd class="profile-custom-field profile-realname"><strong>Real name:</strong> none</dd>
+							    <dd class="profile-posts" data-user-receive-id="4591"><strong>Been&nbsp;thanked:</strong> <a href="/wesuckless/thankslist/givens/4591/false">86 times</a></dd>
+
+						
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content36004">
+
+					<h3 >
+						<a href="./viewtopic.php?p=36004#p36004">Re: Projection Tool from 2D Texture to 3D Sphere</a>
+		</h3>
+
+													
+						<p class="author post-number post-number-phpbb">
+	<a href="./viewtopic.php?p=36004#p36004" title="Copy post link to clipboard">#4</a>
+</p>
+			<p class="author">
+									<a class="unread" href="./viewtopic.php?p=36004#p36004" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="./memberlist.php?mode=viewprofile&amp;u=4591" style="color: #35a219;" class="username-coloured">tida</a></strong> &raquo; </span><time datetime="2021-01-19T16:23:06+00:00">Tue Jan 19, 2021 8:23 am</time>
+			</p>
+			
+			
+			
+			<div class="content" style="border-style:groove; box-shadow: 0px -1px 0px 0px rgb(0 0 0 / 10%); border-top-color:#35a219"><span class="mention">@Millolab</span> Thanks for your feedback. <span class="mention">@Chad</span> impressive, you offer nice pretty very well-thought tools.<script class="js-qq-post-info" type="application/json">{"user":"4591","username":"tida","post":"36004","time":"1611073386"}</script></div>
+
+			
+			
+									
+						<div id='list_thanks36004'>
+</div>
+<div id='div_post_reput36004'>
+</div>
+			
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	<hr class="divider" />
+				<div id="p36020" class="post has-profile bg2">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile36020">
+			<dt class="has-profile-rank has-avatar">
+				<div class="avatar-container">
+																<a href="./memberlist.php?mode=viewprofile&amp;u=4591" class="avatar"><img class="avatar" src="./download/file.php?avatar=4591_1597922137.png" width="100" height="100" alt="User avatar" /></a>														</div>
+								<a href="./memberlist.php?mode=viewprofile&amp;u=4591" style="color: #35a219;" class="username-coloured">tida</a>							</dt>
+
+						<dd class="profile-rank">Fusionista</dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> 453</dd>		<dd class="profile-joined"><strong>Joined:</strong> Mon Jan 27, 2020 4:37 am</dd>		
+		
+		
+<dd id="list_inner_hidden_container_36020" jxdom-closest="dl.postprofile" jxdom-find="dd.profile-joined" jxdom-action="before" >
+<div class="profile-answers"><strong>Answers:</strong> 2</div>
+</dd>
+									<dd class="profile-custom-field profile-realname"><strong>Real name:</strong> none</dd>
+							    <dd class="profile-posts" data-user-receive-id="4591"><strong>Been&nbsp;thanked:</strong> <a href="/wesuckless/thankslist/givens/4591/false">86 times</a></dd>
+
+						
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content36020">
+
+					<h3 >
+						<a href="./viewtopic.php?p=36020#p36020">Re: Projection Tool from 2D Texture to 3D Sphere</a>
+		</h3>
+
+													
+						<p class="author post-number post-number-phpbb">
+	<a href="./viewtopic.php?p=36020#p36020" title="Copy post link to clipboard">#5</a>
+</p>
+			<p class="author">
+									<a class="unread" href="./viewtopic.php?p=36020#p36020" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="./memberlist.php?mode=viewprofile&amp;u=4591" style="color: #35a219;" class="username-coloured">tida</a></strong> &raquo; </span><time datetime="2021-01-20T22:39:58+00:00">Wed Jan 20, 2021 2:39 pm</time>
+			</p>
+			
+			
+			
+			<div class="content" style="border-style:groove; box-shadow: 0px -1px 0px 0px rgb(0 0 0 / 10%); border-top-color:#35a219">This is the first attempt, to distort the 2D texture, that it will be projected onto a 3D sphere to get a nearly seamless behavior at the tip of the poles. First, you need to attach the Seamless Texture Fuse, to get rid of longitudinal issues that typically occur with a 2D texture on a sphere.<br>
+If you connect in addition the Sphere Distort Fuse, you should mostly abandon the compression at the tip of the poles.<br>
+
+<div class="inline-attachment"><!-- ia0 -->SeamlessTexture.fuse<!-- ia0 --></div>
+<div class="inline-attachment"><!-- ia1 -->SphereDistort.fuse<!-- ia1 --></div>
+
+<span data-s9e-mediaembed="youtube" style="display:inline-block;width:100%;max-width:640px"><span style="display:block;overflow:hidden;position:relative;padding-bottom:56.25%"><iframe allowfullscreen="" loading="lazy" scrolling="no" style="background:url(https://i.ytimg.com/vi/ehZFGU3MxGo/hqdefault.jpg) 50% 50% / cover;border:0;height:100%;left:0;position:absolute;width:100%" src="https://www.youtube.com/embed/ehZFGU3MxGo"></iframe></span></span><script class="js-qq-post-info" type="application/json">{"user":"4591","username":"tida","post":"36020","time":"1611182398"}</script></div>
+
+			
+			
+						<div class="rules">You do not have the required permissions to view the files attached to this post.</div>			
+						<div id='list_thanks36020'>
+</div>
+<div id='div_post_reput36020'>
+</div>
+			
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	<hr class="divider" />
+				<div id="p36043" class="post has-profile bg1">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile36043">
+			<dt class="has-profile-rank has-avatar">
+				<div class="avatar-container">
+																<a href="./memberlist.php?mode=viewprofile&amp;u=4591" class="avatar"><img class="avatar" src="./download/file.php?avatar=4591_1597922137.png" width="100" height="100" alt="User avatar" /></a>														</div>
+								<a href="./memberlist.php?mode=viewprofile&amp;u=4591" style="color: #35a219;" class="username-coloured">tida</a>							</dt>
+
+						<dd class="profile-rank">Fusionista</dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> 453</dd>		<dd class="profile-joined"><strong>Joined:</strong> Mon Jan 27, 2020 4:37 am</dd>		
+		
+		
+<dd id="list_inner_hidden_container_36043" jxdom-closest="dl.postprofile" jxdom-find="dd.profile-joined" jxdom-action="before" >
+<div class="profile-answers"><strong>Answers:</strong> 2</div>
+</dd>
+									<dd class="profile-custom-field profile-realname"><strong>Real name:</strong> none</dd>
+							    <dd class="profile-posts" data-user-receive-id="4591"><strong>Been&nbsp;thanked:</strong> <a href="/wesuckless/thankslist/givens/4591/false">86 times</a></dd>
+
+						
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content36043">
+
+					<h3 >
+						<a href="./viewtopic.php?p=36043#p36043">Re: DCTL Sphere Distortion Fuse</a>
+		</h3>
+
+													
+						<p class="author post-number post-number-phpbb">
+	<a href="./viewtopic.php?p=36043#p36043" title="Copy post link to clipboard">#6</a>
+</p>
+			<p class="author">
+									<a class="unread" href="./viewtopic.php?p=36043#p36043" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="./memberlist.php?mode=viewprofile&amp;u=4591" style="color: #35a219;" class="username-coloured">tida</a></strong> &raquo; </span><time datetime="2021-01-22T08:49:26+00:00">Fri Jan 22, 2021 12:49 am</time>
+			</p>
+			
+			
+			
+			<div class="content" style="border-style:groove; box-shadow: 0px -1px 0px 0px rgb(0 0 0 / 10%); border-top-color:#35a219">This describes the math behind it, which I found after the release of the fuse:<br>
+	<a href="http://paulbourke.net/geometry/tiling/" class="postlink">http://paulbourke.net/geometry/tiling/</a>	(Texture map correction for spherical mapping)<br>
+	<a href="https://www.thebest3d.com/dogwaffle/lua/polar/index.html" class="postlink">https://www.thebest3d.com/dogwaffle/lua ... index.html</a><br>
+It's relatively simple as you just consider the diameter of the latitude dependant on the longitude. The described version would only work when you mirror it as the left and right borders will bleed out. <br>
+<a href="https://www.thebest3d.com/dogwaffle/lua/polar/grid800.jpg" class="postlink">https://www.thebest3d.com/dogwaffle/lua ... rid800.jpg</a><br>
+<br>
+<br>
+The DCTL Sphere Distortion Fuse shows exactly the same distortion shaping - but I decided to bleed it into the midsection. This assures a seamless appearance without mirroring and it's the reason, why you will find a blend functionality in the fuse.<script class="js-qq-post-info" type="application/json">{"user":"4591","username":"tida","post":"36043","time":"1611305366"}</script></div>
+
+			
+			
+									
+						<div id='list_thanks36043'>
+</div>
+<div id='div_post_reput36043'>
+</div>
+			
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	<hr class="divider" />
+				<div id="p36044" class="post has-profile bg2">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile36044">
+			<dt class="has-profile-rank has-avatar">
+				<div class="avatar-container">
+																<a href="./memberlist.php?mode=viewprofile&amp;u=1359" class="avatar"><img class="avatar" src="./download/file.php?avatar=1359_1589280863.jpg" width="100" height="100" alt="User avatar" /></a>														</div>
+								<a href="./memberlist.php?mode=viewprofile&amp;u=1359" style="color: #b99565;" class="username-coloured">danell</a>							</dt>
+
+						<dd class="profile-rank">Fusionista</dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> 359</dd>		<dd class="profile-joined"><strong>Joined:</strong> Mon Dec 12, 2016 6:32 am</dd>		
+		
+		
+<dd id="list_inner_hidden_container_36044" jxdom-closest="dl.postprofile" jxdom-find="dd.profile-joined" jxdom-action="before" >
+<div class="profile-answers"><strong>Answers:</strong> 2</div>
+</dd>
+														<dd class="profile-custom-field profile-realname"><strong>Real name:</strong> Jacob Danell</dd>
+							    <dd class="profile-posts" data-user-receive-id="1359"><strong>Been&nbsp;thanked:</strong> <a href="/wesuckless/thankslist/givens/1359/false">39 times</a></dd>
+
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact danell">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact danell</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="https://emberlight.se/" title="Website" class="last-cell">
+										<span class="contact-icon phpbb_website-icon">Website</span>									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content36044">
+
+					<h3 >
+						<a href="./viewtopic.php?p=36044#p36044">Re: Projection Tool from 2D Texture to 3D Sphere</a>
+		</h3>
+
+													
+						<p class="author post-number post-number-phpbb">
+	<a href="./viewtopic.php?p=36044#p36044" title="Copy post link to clipboard">#7</a>
+</p>
+			<p class="author">
+									<a class="unread" href="./viewtopic.php?p=36044#p36044" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="./memberlist.php?mode=viewprofile&amp;u=1359" style="color: #b99565;" class="username-coloured">danell</a></strong> &raquo; </span><time datetime="2021-01-22T10:56:44+00:00">Fri Jan 22, 2021 2:56 am</time>
+			</p>
+			
+			
+			
+			<div class="content" style="border-style:groove; box-shadow: 0px -1px 0px 0px rgb(0 0 0 / 10%); border-top-color:#b99565">wow, awesome work <span class="mention">@tida</span>!<br>
+Love to see this up on reactor soon <img class="smilies" src="./images/smilies/icon_e_smile.gif" width="15" height="17" alt=":)" title="Smile"><script class="js-qq-post-info" type="application/json">{"user":"1359","username":"danell","post":"36044","time":"1611313004"}</script></div>
+
+			
+			
+									
+						<div id='list_thanks36044'>
+</div>
+<div id='div_post_reput36044'>
+</div>
+			
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	<hr class="divider" />
+				<div id="p36054" class="post has-profile bg1">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile36054">
+			<dt class="has-profile-rank has-avatar">
+				<div class="avatar-container">
+																<a href="./memberlist.php?mode=viewprofile&amp;u=1955" class="avatar"><img class="avatar" src="./download/file.php?avatar=1955_1565336723.png" width="90" height="90" alt="User avatar" /></a>														</div>
+								<a href="./memberlist.php?mode=viewprofile&amp;u=1955" style="color: #35a219;" class="username-coloured">TerryPXM</a>							</dt>
+
+						<dd class="profile-rank">Fusioneer</dd>			
+		<dd class="profile-posts"><strong>Posts:</strong> 107</dd>		<dd class="profile-joined"><strong>Joined:</strong> Mon Oct 30, 2017 3:53 am</dd>		
+		
+											<dd class="profile-custom-field profile-phpbb_location"><strong>Location:</strong> Medellin, Colombia.</dd>
+							    <dd class="profile-posts" data-user-receive-id="1955"></dd>
+
+						
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content36054">
+
+					<h3 >
+						<a href="./viewtopic.php?p=36054#p36054">Re: Projection Tool from 2D Texture to 3D Sphere</a>
+		</h3>
+
+													
+						<p class="author post-number post-number-phpbb">
+	<a href="./viewtopic.php?p=36054#p36054" title="Copy post link to clipboard">#8</a>
+</p>
+			<p class="author">
+									<a class="unread" href="./viewtopic.php?p=36054#p36054" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="./memberlist.php?mode=viewprofile&amp;u=1955" style="color: #35a219;" class="username-coloured">TerryPXM</a></strong> &raquo; </span><time datetime="2021-01-23T16:31:25+00:00">Sat Jan 23, 2021 8:31 am</time>
+			</p>
+			
+			
+			
+			<div class="content" style="border-style:groove; box-shadow: 0px -1px 0px 0px rgb(0 0 0 / 10%); border-top-color:#35a219">This is amazing <span class="mention">@tida</span> thanks you very much for putting this together.<script class="js-qq-post-info" type="application/json">{"user":"1955","username":"TerryPXM","post":"36054","time":"1611419485"}</script></div>
+
+			
+			
+									
+						<div id='list_thanks36054'>
+</div>
+<div id='div_post_reput36054'>
+</div>
+			
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	<hr class="divider" />
+	
+<div class="panel">
+			<div class="action-bar bar-bottom">
+		
+					<a href="./posting.php?mode=reply&amp;t=4629" class="button" title="Post a reply">
+									<span>Post Reply</span> <i class="icon fa-reply fa-fw" aria-hidden="true"></i>
+							</a>
+				<a href="./viewtopic.php?t=4629&amp;view=previous" class="button" title="Previous topic">Previous topic</a><a href="./viewtopic.php?t=4629&amp;view=next" class="button" title="Next topic">Next topic</a>
+			<div class="dropdown-container dropdown-button-control topic-tools">
+		<span title="Topic tools" class="button button-secondary dropdown-trigger dropdown-select">
+			<i class="icon fa-wrench fa-fw" aria-hidden="true"></i>
+			<span class="caret"><i class="icon fa-sort-down fa-fw" aria-hidden="true"></i></span>
+		</span>
+		<div class="dropdown">
+			<div class="pointer"><div class="pointer-inner"></div></div>
+			<ul class="dropdown-contents">
+																												<li>
+					<a href="./viewtopic.php?t=4629&amp;view=print" title="Print view" accesskey="p">
+						<i class="icon fa-print fa-fw" aria-hidden="true"></i><span>Print view</span>
+					</a>
+				</li>
+											</ul>
+		</div>
+	</div>
+
+					<form method="post" action="./viewtopic.php?t=4629">
+			<div class="dropdown-container dropdown-container-left dropdown-button-control sort-tools">
+	<span title="Display and sorting options" class="button button-secondary dropdown-trigger dropdown-select">
+		<i class="icon fa-sort-amount-asc fa-fw" aria-hidden="true"></i>
+		<span class="caret"><i class="icon fa-sort-down fa-fw" aria-hidden="true"></i></span>
+	</span>
+	<div class="dropdown hidden">
+		<div class="pointer"><div class="pointer-inner"></div></div>
+		<div class="dropdown-contents">
+			<fieldset class="display-options">
+							<label>Display: <select class="selectpicker" data-width="100%" data-style="btn btn-default form-control" data-container="body" name="st" id="st"><option value="0" selected="selected">All posts</option><option value="1">1 day</option><option value="7">7 days</option><option value="14">2 weeks</option><option value="30">1 month</option><option value="90">3 months</option><option value="180">6 months</option><option value="365">1 year</option></select></label>
+								<label>Sort by: <select class="selectpicker" data-width="100%" data-style="btn btn-default form-control" data-container="body" name="sk" id="sk"><option value="a">Author</option><option value="t" selected="selected">Post time</option><option value="s">Subject</option></select></label>
+				<label>Direction: <select class="selectpicker" data-width="100%" data-style="btn btn-default form-control" data-container="body" name="sd" id="sd"><option value="a" selected="selected">Ascending</option><option value="d">Descending</option></select></label>
+								<hr class="dashed" />
+				<input type="submit" class="button2" name="sort" value="Go" />
+						</fieldset>
+		</div>
+	</div>
+</div>
+			</form>
+		
+		
+		
+					<div class="pagination">
+				Messages: 8
+									&bull; Page <strong>1</strong> of <strong>1</strong>
+							</div>
+			</div>
+		<div class="action-bar actions-jump">
+		<p class="jumpbox-return">
+		<a href="./viewforum.php?f=6" class="left-box arrow-left" accesskey="r">
+			<i class="icon fa-angle-left fa-fw icon-black" aria-hidden="true"></i><span>Return to “Fusion Scripting, Fuses and Macros”</span>
+		</a>
+	</p>
+	
+	
+	<div class="jumpbox dropdown-container dropdown-container-right dropdown-up dropdown-left dropdown-button-control" id="jumpbox">
+		<span title="Jump to" class="button button-secondary dropdown-trigger dropdown-select">
+			<span>Jump to</span>
+			<span class="caret"><i class="icon fa-sort-down fa-fw" aria-hidden="true"></i></span>
+		</span>
+		<div class="dropdown">
+			<div class="pointer"><div class="pointer-inner"></div></div>
+			<ul class="dropdown-contents">
+																								<li><a href="./viewforum.php?f=1" class="jumpbox-cat-link"> <span> Welcome To We Suck Less!</span></a></li>
+																				<li><a href="./viewforum.php?f=3" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Join the Fusion User Community!</span></a></li>
+																				<li><a href="./viewforum.php?f=2" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; About the Forum</span></a></li>
+																				<li><a href="./viewforum.php?f=40" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Looking for Reactor? It's right here...</span></a></li>
+																				<li><a href="./viewforum.php?f=4" class="jumpbox-cat-link"> <span> Blackmagic Design</span></a></li>
+																				<li><a href="./viewforum.php?f=16" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Fusion Studio</span></a></li>
+																				<li><a href="./viewforum.php?f=6" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Fusion Scripting, Fuses and Macros</span></a></li>
+																				<li><a href="./viewforum.php?f=35" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; DaVinci Resolve</span></a></li>
+																				<li><a href="./viewforum.php?f=46" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; DaVinci Resolve Scripting</span></a></li>
+																				<li><a href="./viewforum.php?f=15" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Generation</span></a></li>
+																				<li><a href="./viewforum.php?f=19" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Bug Tracker</span></a></li>
+																				<li><a href="./viewforum.php?f=20" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Wish List</span></a></li>
+																				<li><a href="./viewforum.php?f=21" class="jumpbox-sub-link"><span class="spacer"></span><span class="spacer"></span> <span>&#8627; &nbsp; Tools</span></a></li>
+																				<li><a href="./viewforum.php?f=22" class="jumpbox-sub-link"><span class="spacer"></span><span class="spacer"></span> <span>&#8627; &nbsp; UI</span></a></li>
+																				<li><a href="./viewforum.php?f=23" class="jumpbox-sub-link"><span class="spacer"></span><span class="spacer"></span> <span>&#8627; &nbsp; Scripting and Development</span></a></li>
+																				<li><a href="./viewforum.php?f=24" class="jumpbox-sub-link"><span class="spacer"></span><span class="spacer"></span> <span>&#8627; &nbsp; I/O</span></a></li>
+																				<li><a href="./viewforum.php?f=25" class="jumpbox-sub-link"><span class="spacer"></span><span class="spacer"></span> <span>&#8627; &nbsp; Bins</span></a></li>
+																				<li><a href="./viewforum.php?f=26" class="jumpbox-sub-link"><span class="spacer"></span><span class="spacer"></span> <span>&#8627; &nbsp; Generation</span></a></li>
+																				<li><a href="./viewforum.php?f=27" class="jumpbox-sub-link"><span class="spacer"></span><span class="spacer"></span> <span>&#8627; &nbsp; Documentation</span></a></li>
+																				<li><a href="./viewforum.php?f=28" class="jumpbox-sub-link"><span class="spacer"></span><span class="spacer"></span> <span>&#8627; &nbsp; Other</span></a></li>
+																				<li><a href="./viewforum.php?f=48" class="jumpbox-cat-link"> <span> Open Source VFX</span></a></li>
+																				<li><a href="./viewforum.php?f=49" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Blender</span></a></li>
+																				<li><a href="./viewforum.php?f=54" class="jumpbox-sub-link"><span class="spacer"></span><span class="spacer"></span> <span>&#8627; &nbsp; Download Blender here</span></a></li>
+																				<li><a href="./viewforum.php?f=55" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Gaffer</span></a></li>
+																				<li><a href="./viewforum.php?f=52" class="jumpbox-cat-link"> <span> AI/ML</span></a></li>
+																				<li><a href="./viewforum.php?f=53" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Machine Learning for VFX and Compositing</span></a></li>
+																				<li><a href="./viewforum.php?f=11" class="jumpbox-cat-link"> <span> Showtime!</span></a></li>
+																				<li><a href="./viewforum.php?f=7" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Theatre</span></a></li>
+																				<li><a href="./viewforum.php?f=29" class="jumpbox-cat-link"> <span> Projects and Development</span></a></li>
+																				<li><a href="./viewforum.php?f=42" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; WSL Ideas</span></a></li>
+																				<li><a href="./viewforum.php?f=45" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; We Suck Less Lab</span></a></li>
+																				<li><a href="./viewforum.php?f=32" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Reactor</span></a></li>
+																				<li><a href="./viewforum.php?f=33" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Reactor Submissions</span></a></li>
+												</ul>
+		</div>
+	</div>
+
+	</div>	
+	</div>
+
+
+				
+			
+					
+		</div>	
+			
+
+		<div id="page-footer"  role="contentinfo">
+
+			<div class="navbar" role="navigation">
+	<div class="inner">
+
+	<ul id="nav-footer" class="linklist bulletin" role="menubar">
+
+				<li class="time-zone" data-last-responsive="true">All times are <span title="America/Vancouver">UTC-08:00</span></li>
+				<li class="small-icon icon-uniE0FC rightside" data-last-responsive="true"><a class="go-top" href="#">Top</a></li>
+					<li class="small-icon icon-delete-cookies rightside"><a href="./ucp.php?mode=delete_cookies" data-ajax="true" data-refresh="true" role="menuitem">Delete cookies</a></li>			
+		
+				
+			<li class="small-icon icon-contact rightside"><a href="/wesuckless/contactadmin" role="menuitem">Contact us</a></li>
+		
+	</ul>
+
+	</div>
+</div>
+			
+						
+				
+			<div class="copyright">
+				<div class="copyright-inner">
+										<p class="footer-row">
+						<span class="footer-copyright">Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited</span>
+					</p>
+															<p class="footer-row">
+						<a class="footer-link" href="./ucp.php?mode=privacy" title="Privacy" role="menuitem">
+							<span class="footer-link-text">Privacy</span>
+						</a>
+						|
+						<a class="footer-link" href="./ucp.php?mode=terms" title="Terms" role="menuitem">
+							<span class="footer-link-text">Terms</span>
+						</a>
+					</p>
+																			</div>
+
+				<div class="socials"> 
+					<ul>
+												<li><a href="https://www.youtube.com/user/pietervanhoute" title="Subscribe to WSL on YouTube!"><i class="icon-youtube"></i></a></li>												<li><a href="https://www.steakunderwater.com/wesuckless/feed.php" title="Subscribe to our RSS Feed"><i class="icon-feed2"></i></a></li>												<li><a href="https://www.twitter.com/steakunderwater" title="Follow us on Twitter"><i class="icon-twitter"></i></a></li>												<li><a href="https://www.facebook.com/groups/blackmagic.fusion/" title="Fusion Users on Facebook"><i class="icon-facebook"></i></a></li>															
+					</ul>					
+				</div>		
+				
+			</div>
+
+			<div id="darkenwrapper" data-ajax-error-title="AJAX error" data-ajax-error-text="Something went wrong when processing your request." data-ajax-error-text-abort="User aborted request." data-ajax-error-text-timeout="Your request timed out; please try again." data-ajax-error-text-parsererror="Something went wrong with the request and the server returned an invalid reply.">
+				<div id="darken">&nbsp;</div>
+			</div>
+			
+
+			<div id="phpbb_alert" class="phpbb_alert" data-l-err="Error" data-l-timeout-processing-req="Request timed out.">
+				<a href="#" class="alert_close"></a>
+				<h2 class="alert_title">&nbsp;</h2><p class="alert_text"></p>
+			</div>
+			<div id="phpbb_confirm" class="phpbb_alert">
+				<a href="#" class="alert_close"></a>
+				<div class="alert_text"></div>
+			</div>
+		</div>
+
+	</div>
+</div>
+
+<div style="display:none;">
+	<a id="bottom" class="anchor" accesskey="z"></a>
+	</div>
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-migrate-3.3.2.min.js"></script>
+<script>window.jQuery || document.write('\x3Cscript src="./assets/javascript/jquery-3.5.1.min.js?assets_version=858">\x3C/script>');</script><script src="./assets/javascript/core.js?assets_version=858"></script>
+<script src="./styles/Subway/theme/js/custom.bootstrap.min.js"></script>
+<script src="./styles/Subway/theme/js/custom.js"></script>
+	<script>
+		(function($){
+			var $fa_cdn = $('head').find('link[rel="stylesheet"]').first(),
+				$span = $('<span class="fa" style="display:none"></span>').appendTo('body');
+			if ($span.css('fontFamily') !== 'FontAwesome' ) {
+				$fa_cdn.after('<link href="./assets/css/font-awesome.min.css" rel="stylesheet">');
+				$fa_cdn.remove();
+			}
+			$span.remove();
+		})(jQuery);
+	</script>
+
+
+
+<script>
+	(function() {
+		var cx = '001731154979773342875\u003Adjxyfekf15f';
+		var gcse = document.createElement('script');
+		gcse.type = 'text/javascript';
+		gcse.async = true;
+		gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+			'//cse.google.com/cse.js?cx=' + cx;
+		var s = document.getElementsByTagName('script')[0];
+		s.parentNode.insertBefore(gcse, s);
+	})();
+</script>
+
+
+<script type="text/javascript" src="./styles/Subway/theme/nivo-slider/jquery.nivo.slider.pack.js"></script>
+<script type="text/javascript">
+	$(window).load(function() {
+		$('#nivoslider').nivoSlider({
+		    effect: 'random',
+		    slices: 15,                    
+		    boxCols: 8,                    
+		    boxRows: 4,                    
+		    animSpeed: 2000,                
+		    pauseTime: 8000,                
+		    directionNav: false,            
+		    controlNav: true,             	    
+		    pauseOnHover: true          
+		});
+	});	
+</script>
+
+
+<div style="display: none" data-allow-quickedit=""></div>
+<script>
+		var elonw_title = "Opens\u0020in\u0020new\u0020window";
+</script>
+<script>
+(function($) {  // Avoid conflicts with other libraries
+
+'use strict';
+
+	phpbb.addAjaxCallback('reporttosfs', function(data) {
+		if (data.postid !== "undefined") {
+			$('#sfs' + data.postid).hide();
+			phpbb.closeDarkenWrapper(5000);
+		}
+	});
+
+})(jQuery);
+</script><script>
+$(document).ready(function(){
+	$("#autologin").prop(
+		"checked", true
+	);
+});
+</script>
+									<script>
+		var vseLightbox = {};
+		vseLightbox.resizeWidth = 640;
+		vseLightbox.lightboxGal = 1;
+		vseLightbox.lightboxSig = 0;
+		vseLightbox.imageTitles = 0;
+		vseLightbox.downloadFile = 'download/file.php';
+	</script>
+
+<script src="./ext/marc/quickedit/styles/prosilver/template/quickedit.js?assets_version=858"></script>
+<script src="./ext/o0johntam0o/codeboxplus/styles/all/template/script.js?assets_version=858"></script>
+<script src="./ext/kasimi/postnumbers/styles/all/template/postnumbers.js?assets_version=858"></script>
+<script src="./ext/senky/infinitescroll/styles/all/template/js/infinitescroll.min.js?assets_version=858"></script>
+<script src="./ext/senky/infinitescroll/styles/prosilver/template/js/infinitescroll_options.min.js?assets_version=858"></script>
+<script src="./ext/phpbb/boardannouncements/styles/all/template/js/boardannouncements.js?assets_version=858"></script>
+<script src="./ext/kinerity/bestanswer/styles/all/template/jxtools.js?assets_version=858"></script>
+<script src="./ext/kinerity/bestanswer/styles/all/template/jxtools.js?assets_version=858"></script>
+<script src="./ext/kinerity/bestanswer/styles/all/template/jxtools.js?assets_version=858"></script>
+<script src="./ext/kinerity/bestanswer/styles/all/template/jxtools.js?assets_version=858"></script>
+<script src="./ext/kinerity/bestanswer/styles/all/template/jxtools.js?assets_version=858"></script>
+<script src="./ext/kinerity/bestanswer/styles/all/template/jxtools.js?assets_version=858"></script>
+<script src="./styles/Subway/template/forum_fn.js?assets_version=858"></script>
+<script src="./styles/Subway/template/ajax.js?assets_version=858"></script>
+<script src="./ext/ernadoo/qte/styles/prosilver/template/jquery.qte.js?assets_version=858"></script>
+<script src="./ext/rmcgirr83/elonw/styles/all/template/js/elonw.js?assets_version=858"></script>
+<script src="./ext/sniper/s_username/styles/all/template/java/s_username.js?assets_version=858"></script>
+<script src="./ext/vse/lightbox/styles/all/template/js/resizer.js?assets_version=858"></script>
+<script src="./ext/vse/lightbox/styles/all/template/lightbox/js/lightbox.min.js?assets_version=858"></script>
+<script src="https://unpkg.com/details-element-polyfill@2.4.0/dist/details-element-polyfill.js"></script>
+<script src="./ext/alfredoramos/simplespoiler/styles/all/theme/js/spoiler.min.js?assets_version=858"></script>
+
+
+	<script type="text/javascript">
+// <![CDATA[
+	var postNumbers = {
+		lang: {
+			copied			: 'Copied\u0021',
+			copyManually	: 'Copy\u0020to\u0020clipboard\u003A\u0020Ctrl\/Cmd\u002BC,\u0020Enter'
+		}
+	};
+// ]]>
+</script>
+
+<script>const sitesplat_board_url = 'https://www.steakunderwater.com/wesuckless/';</script><script>$('.tables1 br').remove();</script>
+<a rel="nofollow" style="display:none;" href="https://steakunderwater.com/blackhole/">Do NOT follow this link or you will be banned from the site!</a>
+</body>
+</html>
