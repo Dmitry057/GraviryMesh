@@ -1,14 +1,8 @@
 # GraviryMesh
 
-# You can make gravity simulation with various shapes(like torus, monkey, box and other)
+## You can make gravity simulation with various shapes(like torus, monkey, box and other) ##
 
-
-
-https://user-images.githubusercontent.com/47187489/207707974-f3f3177a-17c8-44ad-8cc7-90e7273611ce.mp4
-
-The full video is being prepared...
-
-
+#[video of the process](https://youtu.be/_QT-49P0-c8)#
 
 # Implementation Instructions
 
@@ -22,7 +16,7 @@ and mesh, witch will consists this points
 
 The quality of simulation directly depends on the number and correctness of the placement of points
 
-After all, you can add the script Planet.cs on all of your points and select # IsStatic
+After all, you can add the script   [Planet.cs](https://github.com/Dmitry057/GraviryMesh/blob/main/Assets/Scripts/GravitationSimulation/Planet.cs) on all of your points and select *IsStatic*
 
 ![image](https://user-images.githubusercontent.com/47187489/207709589-703d6bae-cb40-473a-8720-4d9b123c7650.png)
 
