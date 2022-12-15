@@ -20,7 +20,7 @@ After all, you can add the script   [Planet.cs](https://github.com/Dmitry057/Gra
 
 ![image](https://user-images.githubusercontent.com/47187489/207709589-703d6bae-cb40-473a-8720-4d9b123c7650.png)
 
-It remains only to add the MKS prefab or create your own object with an inherited class from GravitationSimulation.cs
+It remains only to add the MKS prefab or create your own object with an inherited class from [GravitationSimulation.cs](https://github.com/Dmitry057/GraviryMesh/blob/main/Assets/Scripts/GravitationSimulation/GravitySimulation.cs)
 
 Now your simulation will work correctly!
 
