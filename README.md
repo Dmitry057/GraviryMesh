@@ -2,7 +2,7 @@
 
 ## You can make gravity simulation with various shapes(like torus, monkey, box and other) ##
 
-## [Video of the process]https://youtu.be/_QT-49P0-c8
+## [Video of the process](https://youtu.be/_QT-49P0-c8)
 
 # Implementation Instructions
 
