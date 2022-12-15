@@ -10,19 +10,16 @@ public class MKS : GravitySimulation
 
     public GameObject particles;
     public float startSpeed = 36f;
-    public bool DrawEpt = true;
+    public bool isDrawing = true;
     public bool isRunning = false;
     public TextMeshProUGUI text;
     
-    private Color _green = new Color (0,0.8f, 0.4f, 0.8f); 
-    private Color _red = new Color (0.8f, 0, 0.4f, 0.8f);
-
+    private Color _green = new Color (0,0.8f, 0.4f, 0.2f); 
+    private Color _red = new Color (0.8f, 0, 0.4f, 0.2f);
     
-    private float _height = 5f;
-    
-    
-    private float _longitude = 0;
-    private float _latitude = 90;
+    public float _height = 5f;
+    public float _longitude = 0;
+    public float _latitude = 90;
 
     public void GetXForce(string X) => _startForce.x = float.TryParse(X, out _startForce.x) ? _startForce.x : 0;
     public void GetYForce(string Y) => _startForce.y = float.TryParse(Y, out _startForce.y) ? _startForce.y : 0;
@@ -37,7 +34,7 @@ public class MKS : GravitySimulation
 
     public void GetLongitude(string longitude)
     {
-        _longitude = float.TryParse(longitude, out _longitude) ? float.Parse(longitude)/2 : 0;
+        _longitude = float.TryParse(longitude, out _longitude) ? float.Parse(longitude) : 0;
         ConvertFromMeridianToVector3();
     }
     
@@ -47,22 +44,30 @@ public class MKS : GravitySimulation
         ConvertFromMeridianToVector3();
     }
     
-    public override void Start()
+    public override void Awake()
     {
-        base.Start();
+        base.Awake();
+        
         ConvertFromMeridianToVector3();
+        
         rb.isKinematic = true;
     }
     public void ConvertFromMeridianToVector3()
     {
         _height = Math.Clamp(_height, 3f, 1000f);
         // convert latitude and longitude to vector3
-        
-        float x = _height * Mathf.Cos(_longitude * Mathf.Deg2Rad) * Mathf.Cos(_latitude * Mathf.Deg2Rad);
-        float y = _height * Mathf.Sin(_longitude * Mathf.Deg2Rad);
-        float z = _height * Mathf.Cos(_longitude * Mathf.Deg2Rad) * Mathf.Sin(_latitude * Mathf.Deg2Rad);
+        float x = _height * Mathf.Cos(_latitude * Mathf.Deg2Rad) * Mathf.Cos(_longitude * Mathf.Deg2Rad);
+        float y = _height * Mathf.Sin(_latitude * Mathf.Deg2Rad);
+        float z = _height * Mathf.Cos(_latitude * Mathf.Deg2Rad) * Mathf.Sin(_longitude * Mathf.Deg2Rad);
         transform.position = new Vector3(x, y, z);
     }
+
+    public void SetTime(string time)
+    {
+        float t = Time.timeScale;
+        Time.timeScale = float.TryParse(time,out t) ? float.Parse(time) : 1;
+    }
+
     public void RunMKS()
     {   
         isRunning = true;
@@ -70,21 +75,19 @@ public class MKS : GravitySimulation
         rb.AddForce(_startForce);
         
     }
-    public float DrawLines(GravitySimulation attractedObj)
+  
+    public void DrawLines(GravitySimulation attractedObj, float dist)
     {
         RaycastHit hit;
-        float value = 1;
         if (Physics.Raycast(transform.position, (attractedObj.transform.position - transform.position), out hit, 10))
         {
-            value = Vector3.Distance(hit.point, attractedObj.transform.position);
-      
-            Debug.DrawLine(transform.position, hit.point, _green);
+           
+            Debug.DrawLine(transform.position, hit.point, _green*5/dist);
           
-            Debug.DrawLine(hit.point,attractedObj.transform.position, _red);
+            Debug.DrawLine(hit.point,attractedObj.transform.position, _red*5/dist);
                 
 
         }
-        return value;
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -96,7 +99,7 @@ public class MKS : GravitySimulation
     {
         particles.SetActive(true);
         
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(0.5f);
         Destroy(gameObject);
     }
 
@@ -108,20 +111,19 @@ public class MKS : GravitySimulation
         {
             base.AttractUpdately();
         }
+        
     }
 
     public override void Attract(GravitySimulation attractedObj)
     {
-        Rigidbody rbToAttract = attractedObj.rb;
-
-        Vector3 direction = rbToAttract.position - rb.position;
-        float distance = direction.magnitude;
-
-        float forceMagnitude = Mathf.Clamp(G*(rb.mass * rbToAttract.mass) / Mathf.Pow(distance, 2), 0, 1000);
-        Vector3 force = direction.normalized * forceMagnitude;
-        if (DrawEpt)
-            DrawLines(attractedObj);
-        rb.AddForce(force);
         
+        base.Attract(attractedObj);
+        var distance = Vector3.Distance(transform.position, attractedObj.transform.position);
+        if (distance > 40)
+        {
+            StartCoroutine(Die());
+        }
+        if (isDrawing)
+            DrawLines(attractedObj, distance);
     }
 }

@@ -19,14 +19,13 @@ public abstract class GravitySimulation : MonoBehaviour
 
     private List<GravitySimulation> OtherSimulations = new List<GravitySimulation>();
     [HideInInspector]
-    public const float G = 6.67408f;
-    
+    public const float G = 0.0000000000667f;
 
-    public virtual void Start()
+    private const float _unityMass = 10000000000; //adopts unity mass to real mass
+    public virtual void Awake()
     {
         rb = GetComponent<Rigidbody>();
         rb.isKinematic = isStatic;
-        
         var others = FindObjectsOfType<GravitySimulation>();
         foreach (var other in others)
         {
@@ -59,11 +58,8 @@ public abstract class GravitySimulation : MonoBehaviour
         if (distance > maxDistance)
             return;
         
-        float forceMagnitude = Mathf.Clamp(G*(rb.mass * rbToAttract.mass) / Mathf.Pow(distance, 2), 0, 1000);
+        float forceMagnitude = Mathf.Clamp(G*_unityMass*(rb.mass * rbToAttract.mass) / Mathf.Pow(distance, 2), 0, 1000);
         Vector3 force = direction.normalized * forceMagnitude;
         rb.AddForce(force);
-        
-        
-        
     }
 } 

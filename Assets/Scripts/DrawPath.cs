@@ -4,13 +4,14 @@ using UnityEngine;
 
 public class DrawPath : MonoBehaviour
 {
-    public LineRenderer _lineRenderer;
+    private LineRenderer _lineRenderer;
 
     private MKS _mks;
     private float t = 0f;
     private void Start()
     {
         _mks = GetComponent<MKS>();
+        _lineRenderer = FindObjectOfType<LineRenderer>();
         _lineRenderer.startWidth = 0.05f;
         _lineRenderer.endWidth = 0.05f;
         _lineRenderer.positionCount = 0;
